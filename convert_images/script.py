@@ -18,9 +18,9 @@ def get_img_path(dir_path):
 
 
 def process_img(img):
-    """convert image to RGB mode and rotate it 90 degree clockwise"""
+    """convert image to RGB mode, resize image to 128x128 and rotate it -90 degree clockwise"""
     img = img.convert("RGB")
-    # img = img.resize(128, 128)
+    img = img.resize(128, 128)
     return img.rotate(-90)
 
 
