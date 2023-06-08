@@ -64,5 +64,15 @@ The image directory contains 100 images images that will be process and converte
 - Size: 192 x 192
 - Format: TIFF
 - Rotated 90° anti-clockwise  
+
+### [icons/](https://github.com/EmmaAdabra/Automated_tasks/tree/main/convert_images/icons)
+
+The icons directory contains 100 images that have been successfully converted to JPEG format.
+**Image properties**:
+
+- Mode: RGB
+- Size: 128 x 128
+- Format: JPEG
+- Rotated 90° clockwise  
   
 >N/B: All images must be converted to RGB mode before it can be successfully save in JPEG format.
