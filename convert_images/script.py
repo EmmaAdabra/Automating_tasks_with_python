@@ -64,7 +64,7 @@ def main():
         sys.exit(1)
 
     print(
-        f"{count} Images successfully converted\nMode: RGB\nSize: 128 x 128\nFormat JPEG"
+        f"{count} Images successfully converted\nMode: RGB\nSize: 128 x 128\nFormat JPEG\nSaved to ... {save_path}"
     )
 
 
