@@ -8,14 +8,14 @@ dir_path = os.path.join(home, "images")
 save_path = os.path.join(home, "icons")
 
 
-def get_img_path(dir_path):
+def get_images(dir_path):
     """create a list of address path to the images"""
-    image_paths = [
+    images = [
         os.path.join(dir_path, img_name)
         for img_name in os.listdir(dir_path)
         if img_name[0] != "."
     ]
-    return image_paths
+    return images
 
 
 def process_img(img):
@@ -39,9 +39,9 @@ def main():
     if len(os.listdir(dir_path)) == 0:
         print("Directory is empty")
 
-    for img_path in get_img_path(dir_path):
-        img_name = os.path.basename(img_path)
-        img = Image.open(img_path)
+    for image in get_images(dir_path):
+        img_name = os.path.basename(image)
+        img = Image.open(image)
         img = process_img(img)
         save_as_jpeg(img_name, img)
 
