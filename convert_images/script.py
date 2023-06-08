@@ -5,9 +5,15 @@ import os
 import sys
 
 count = 0  # use to keep track of successfully converted images
-home = os.path.expanduser("~")  # get full path to user dir
-dir_path = os.path.join(home, "images")  # create full path to images source dir
-save_path = os.path.join(home, "icons")  # create full path to dest (save) dir
+home = os.path.join(
+    os.path.expanduser("~"), "automate_real_world_tasks"
+)  # get full path to user dir
+dir_path = os.path.join(
+    home, os.path.join("convert_images", "images")
+)  # create full path to images source dir
+save_path = os.path.join(
+    home, os.path.join("convert_images", "icons")
+)  # create full path to dest (save) dir
 
 
 def get_images(dir_path):
