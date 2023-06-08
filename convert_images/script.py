@@ -2,7 +2,9 @@
 
 from PIL import Image
 import os
+import sys
 
+count = 0  # use to keep track of successfully converted images
 home = os.path.expanduser("~")  # get full path to user dir
 dir_path = os.path.join(home, "images")  # create full path to images source dir
 save_path = os.path.join(home, "icons")  # create full path to dest (save) dir
@@ -31,6 +33,8 @@ def save_as_jpeg(img_name, img):
     if not os.path.exists(save_path):
         os.makedirs(save_path)
     img.save(os.path.join(save_path, img_name + ".jpeg"))  # save image in format
+    global count
+    count += 1  # Increments the global variable count
 
 
 def main():
@@ -41,12 +45,20 @@ def main():
     if len(os.listdir(dir_path)) == 0:
         print("Directory is empty")
 
-    # pass each image obj to the appropriate function
-    for image in get_images(dir_path):
-        img_name = os.path.basename(image)
-        img = Image.open(image)
-        img = process_img(img)
-        save_as_jpeg(img_name, img)
+    try:
+        # pass each image obj to the appropriate function
+        for image in get_images(dir_path):
+            img_name = os.path.basename(image)
+            img = Image.open(image)
+            img = process_img(img)
+            save_as_jpeg(img_name, img)
+    except Exception as e:
+        print(f" Error!!! Conversion Aborted\n{e}")
+        sys.exit(1)
+
+    print(
+        f"{count} Images successfully converted\nMode: RGB\nSize: 128 x 128\nFormat JPEG"
+    )
 
 
 # only run script as main module
