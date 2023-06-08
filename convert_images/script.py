@@ -38,6 +38,7 @@ def save_as_jpeg(img_name, img):
 
 
 def main():
+    """controls program flow and logic"""
     # check if source directory exist
     if not os.path.exists(dir_path):
         print("Directory does not exist")
