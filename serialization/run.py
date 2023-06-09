@@ -62,7 +62,7 @@ def main():
     feedback_list = get_users_feedback(feedback_files_dir)
     feedback_dict = parse_feedback_file(feedback_list)
     post_feedback = post_to_web(feedback_dict)
-    print(f"Posted: {post_feedback[1]}\nFailed post: {post_feedback[1]}")
+    print(f"Posted: {post_feedback[1]} feedbacks\nFailed post: {post_feedback[1]}")
 
 
 # only run script as main module
