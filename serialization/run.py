@@ -2,15 +2,10 @@
 
 # import the required module
 import os
-import json
 import requests
 
-# create path to the project directory
-project_path = os.path.join(
-    os.path.expanduser("~"), os.path.join("automate_real_world_tasks", "serialization")
-)
-# create path to the directory containing  user's feedback
-feedback_files_dir = os.path.join(project_path, "users_feedback")
+# path user's feedback dir
+feedback_files_dir = os.path.join(os.getcwd(), "serialization/users_feedback")
 
 
 def get_users_feedback(file_dir_path):
@@ -24,38 +19,34 @@ def get_users_feedback(file_dir_path):
 
 def parse_feedback_file(feedback_file_list):
     """get list of user feedbacks file path, open the text file, parse the feedback txt to dictionary and return a list users feedback dictionary"""
+
     feedback_dict = []  # holds the user's feedback dictionary
+    # feedback dictionary keys
+    keys = ["title","name","date","feedback",]
 
     # iterate through feedback file in the list
     for feedback in feedback_file_list:
-        add_feedback = (
-            {}
-        )  # tmp dictionary use to add user's feedback dictionary to the list
-
         # open each feedback file in txt format
         with open(feedback, mode="r", newline="") as feedback_txt:
-            # add the content of the feedback file to a list
-            data = [row.strip() for row in feedback_txt.readlines()]
-        # create a key value pair (dictionary) for each content of the feedback file
-
-        (
-            add_feedback["title"],
-            add_feedback["name"],
-            add_feedback["date"],
-            add_feedback["feedback"],
-        ) = data
-        feedback_dict.append(add_feedback)  # append the dictionary to a list
+            # add the content of file to a list
+            data = [row for row in feedback_txt.read().splitlines()]
+        # create a key value pair for each content of the feedback file
+        feedback_dict.append(dict(zip(keys, data)))
     return feedback_dict
 
 
 def post_to_web(feedback_dict):
     """get users feedback as dictionary and post it to a web server using query string"""
-    for feedback_data in feedback_dict:
-        response = requests.post("http://34.123.199.21/feedback/", json=feedback_data)
-        if response.status_code != 201:
-            return response.status_code
-    return response.status_code
+    failed = 0  # number of failed post
+    success = 0  # number of successful post
 
+    for feedback_data in feedback_dict:
+        response = requests.post("http://<url/api>", json=feedback_data)
+        if response.status_code == 201:
+            success += 1
+        else:
+            failed += 1
+    return {"success": success, "failed": failed}
 
 
 def main():
@@ -71,12 +62,7 @@ def main():
     feedback_list = get_users_feedback(feedback_files_dir)
     feedback_dict = parse_feedback_file(feedback_list)
     post_feedback = post_to_web(feedback_dict)
-
-    # check request status code
-    if post_feedback == 201:
-        print("Data posted successfully")
-    else:
-        print("Could not post data")
+    print(f"Posted: {post_feedback[1]}\nFailed post: {post_feedback[1]}")
 
 
 # only run script as main module
