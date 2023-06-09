@@ -50,8 +50,12 @@ def parse_feedback_file(feedback_file_list):
 
 def post_to_web(feedback_dict):
     """get users feedback as dictionary and post it to a web server using query string"""
-    response = requests.post("url/api", json=feedback_dict)
+    for feedback_data in feedback_dict:
+        response = requests.post("http://34.123.199.21/feedback/", json=feedback_data)
+        if response.status_code != 201:
+            return response.status_code
     return response.status_code
+
 
 
 def main():
