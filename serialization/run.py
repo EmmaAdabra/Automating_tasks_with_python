@@ -46,3 +46,9 @@ def parse_feedback_file(feedback_file_list):
         ) = data
         feedback_dict.append(add_feedback)  # append the dictionary to a list
     return feedback_dict
+
+
+def post_to_web(feedback_dict):
+    """get users feedback as dictionary and post it to a web server using query string"""
+    response = requests.post("url/api", json=feedback_dict)
+    return response.status_code
