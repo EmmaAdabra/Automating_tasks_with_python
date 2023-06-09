@@ -52,3 +52,29 @@ def post_to_web(feedback_dict):
     """get users feedback as dictionary and post it to a web server using query string"""
     response = requests.post("url/api", json=feedback_dict)
     return response.status_code
+
+
+def main():
+    """controls program flow and logic"""
+    # check if source directory exist
+    if not os.path.exists(feedback_files_dir):
+        print("Directory does not exist")
+    # check if source directory is empty
+    if len(os.listdir(feedback_files_dir)) == 0:
+        print("Directory is empty")
+
+    # passing the required parameter for each function sequentially
+    feedback_list = get_users_feedback(feedback_files_dir)
+    feedback_dict = parse_feedback_file(feedback_list)
+    post_feedback = post_to_web(feedback_dict)
+
+    # check request status code
+    if post_feedback == 201:
+        print("Data posted successfully")
+    else:
+        print("Could not post data")
+
+
+# only run script as main module
+if __name__ == "__main__":
+    main()
