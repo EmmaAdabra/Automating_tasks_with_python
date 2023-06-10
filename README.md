@@ -22,4 +22,4 @@ Each project in this repository focuses on a specific real-world task and provid
 - [Scale and convert images using PIL](https://github.com/EmmaAdabra/Automated_tasks/tree/main/convert_images)
 
 ### Project 2
-- [Parsing customers's feedbacks from .txt format to dictionaries and Upload to Running Web Service](https://github.com/EmmaAdabra/Automated_tasks/tree/main/serialization)
+- [Parsing customers's feedbacks from .txt format to dictionaries and Upload to Running Web Service](https://github.com/EmmaAdabra/Automated_tasks/tree/main/feedback_parser)
